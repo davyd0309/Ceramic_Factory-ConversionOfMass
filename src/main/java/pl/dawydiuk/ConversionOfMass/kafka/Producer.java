@@ -11,11 +11,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Producer {
 
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
     @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+    public Producer(KafkaTemplate<String, String> kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
 
-    @Value("${app.topic.someTopic}")
+    @Value("${app.topic.mass}")
     private String topic;
 
     public void send(String message) {
