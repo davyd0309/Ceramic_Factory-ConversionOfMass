@@ -1,11 +1,16 @@
 spring:
   kafka:
     bootstrap-servers: localhost:9092
+    consumer:
+      enable-auto-commit: true
+
 
 app:
   topic:
-    orders-to-be-completed: orders-to-be-completed
-    orders-completed-conversion-of-mass: orders-conversion-of-mass
+    orders-from-foundry: orders-from-foundry
+    mass-to-foundry: mass-to-foundry
+server:
+  port: 8080
 
 #logging:
 #  level:
