@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class OrderFromFoundryConsumer {
 
-    private MassProducer massProducer;
+    private final MassProducer massProducer;
 
     @Autowired
     public OrderFromFoundryConsumer(MassProducer massProducer) {
@@ -18,10 +18,9 @@ public class OrderFromFoundryConsumer {
     }
 
     @KafkaListener(topics = "${app.topic.orders-from-foundry}")
-    public void getMessageFromFoundry(@Payload String message) {
-
-        log.info("received message='{}' from foundry", message);
-        if (message.equals("Mass please")) {
+    public void getInformationFromFoundry(@Payload String information) {
+        log.info("Received information='{}' from foundry", information);
+        if (information.equals("Not enough mass")) {
             massProducer.sendMass();
         }
     }
