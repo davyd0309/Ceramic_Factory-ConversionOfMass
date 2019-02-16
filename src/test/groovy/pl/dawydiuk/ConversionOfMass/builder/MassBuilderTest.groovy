@@ -1,9 +1,11 @@
 package pl.dawydiuk.ConversionOfMass.builder
 
+import io.vavr.control.Try
 import models.Clay
 import models.Kaolinite
 import models.Quartz
-import pl.dawydiuk.ConversionOfMass.rest.RawMeterialsConsumer
+import org.springframework.web.client.RestClientResponseException
+import pl.dawydiuk.ConversionOfMass.rest.RestTryConsumer
 import spock.lang.Specification
 
 /**
@@ -11,14 +13,14 @@ import spock.lang.Specification
  */
 class MassBuilderTest extends Specification {
 
-    private RawMeterialsConsumer rawMeterialsConsumer = Stub()
-    private MassBuilder builder = new MassBuilder(rawMeterialsConsumer)
+    private RestTryConsumer restTryConsumer = Stub()
+    private MassBuilder builder = new MassBuilder(restTryConsumer);
 
     def "should create mass with success"() {
         given:
-        rawMeterialsConsumer.getClay() >> Clay.builder().build()
-        rawMeterialsConsumer.getKaolinite() >> Kaolinite.builder().build()
-        rawMeterialsConsumer.getQuartz() >> Quartz.builder().build()
+        restTryConsumer.getClay() >> Try.success(Clay.builder().build())
+        restTryConsumer.getKaolinite() >> Try.success(Kaolinite.builder().build())
+        restTryConsumer.getQuartz() >> Try.success(Quartz.builder().build())
 
         when:
         def mass = builder.createMass()
@@ -27,14 +29,35 @@ class MassBuilderTest extends Specification {
         mass != null
         mass.getId() == 1
         mass.getWeight() == 100.5d
+        mass.quartz != null
+        mass.kaolinite != null
+        mass.clay != null
     }
 
-    def "should throw exception if raw materials is unavailable"() {
+    def "should dont set clay"() {
         given:
-
+        restTryConsumer.getClay() >> Try.failure(new RestClientResponseException("", 503, "", null, null, null))
         when:
         def mass = builder.createMass()
         then:
-        mass == null
+        mass.clay == null
+    }
+
+    def "should dont set kaolinite"() {
+        given:
+        restTryConsumer.getKaolinite() >> Try.failure(new RestClientResponseException("", 503, "", null, null, null))
+        when:
+        def mass = builder.createMass()
+        then:
+        mass.kaolinite == null
+    }
+
+    def "should dont set quartz"() {
+        given:
+        restTryConsumer.getQuartz() >> Try.failure(new RestClientResponseException("", 503, "", null, null, null))
+        when:
+        def mass = builder.createMass()
+        then:
+        mass.quartz == null
     }
 }

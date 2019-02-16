@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import pl.dawydiuk.ConversionOfMass.builder.MassBuilder;
-import pl.dawydiuk.ConversionOfMass.rest.RawMeterialsConsumer;
+import pl.dawydiuk.ConversionOfMass.rest.RawMeterialsRestConsumer;
 
 @Service
 @Slf4j
@@ -21,11 +21,10 @@ public class MassProducer {
 
 
     @Autowired
-    public MassProducer(KafkaTemplate<String, Mass> kafkaTemplate, RawMeterialsConsumer rawMeterialsConsumer, MassBuilder massBuilder) {
+    public MassProducer(KafkaTemplate<String, Mass> kafkaTemplate, RawMeterialsRestConsumer rawMeterialsRestConsumerImpl, MassBuilder massBuilder) {
         this.kafkaTemplate = kafkaTemplate;
         this.massBuilder = massBuilder;
     }
-
 
     void sendMass() {
         kafkaTemplate.send(topic, massBuilder.createMass());

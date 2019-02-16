@@ -3,7 +3,7 @@ package pl.dawydiuk.ConversionOfMass.builder;
 import models.Mass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.dawydiuk.ConversionOfMass.rest.RawMeterialsConsumer;
+import pl.dawydiuk.ConversionOfMass.rest.RestTryConsumer;
 
 /**
  * Created by Judith on 02.02.2019.
@@ -11,21 +11,20 @@ import pl.dawydiuk.ConversionOfMass.rest.RawMeterialsConsumer;
 @Component
 public class MassBuilder {
 
-    private final RawMeterialsConsumer rawMeterialsConsumer;
+    private final RestTryConsumer restTryConsumer;
 
     @Autowired
-    public MassBuilder(RawMeterialsConsumer rawMeterialsConsumer) {
-        this.rawMeterialsConsumer = rawMeterialsConsumer;
+    public MassBuilder(RestTryConsumer restTryConsumer) {
+        this.restTryConsumer = restTryConsumer;
     }
 
     public Mass createMass() {
-        return Mass.builder()
-                .id(1)
-                .weight(100.5)
-                .clay(rawMeterialsConsumer.getClay())//Celowo uderzam trzy razy żeby więcej się w apce działo :)
-                .kaolinite(rawMeterialsConsumer.getKaolinite())
-                .quartz(rawMeterialsConsumer.getQuartz())
-                .build();
+        Mass.MassBuilder mass = Mass.builder();
+        mass.id(1).weight(100.5);
+        restTryConsumer.getClay().onSuccess(mass::clay);//Celowo uderzam trzy razy żeby więcej się w apce działo :)
+        restTryConsumer.getKaolinite().onSuccess(mass::kaolinite);
+        restTryConsumer.getQuartz().onSuccess(mass::quartz);
+        return mass.build();
     }
 
 }

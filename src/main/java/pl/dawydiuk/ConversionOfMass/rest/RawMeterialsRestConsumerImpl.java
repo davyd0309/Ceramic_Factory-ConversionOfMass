@@ -4,9 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import models.Clay;
 import models.Kaolinite;
 import models.Quartz;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
-
 
 
 /**
@@ -15,22 +16,30 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 @Slf4j
-public class RawMeterialsConsumer {
+public class RawMeterialsRestConsumerImpl implements RawMeterialsRestConsumer {
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
     private static final String CLAY_URL = "http://localhost:8082/rawmaterials/clay";
     private static final String QUARTZ_URL = "http://localhost:8082/rawmaterials/quartz";
     private static final String KAOLINITE_URL = "http://localhost:8082/rawmaterials/kaolinite";
 
-    public Clay getClay() {
+    @Autowired
+    public RawMeterialsRestConsumerImpl(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
+    @Override
+    public Clay getClay() throws RestClientResponseException {
         return restTemplate.getForObject(CLAY_URL, Clay.class);
     }
 
-    public Quartz getQuartz() {
+    @Override
+    public Quartz getQuartz() throws RestClientResponseException {
         return restTemplate.getForObject(QUARTZ_URL, Quartz.class);
     }
 
-    public Kaolinite getKaolinite() {
+    @Override
+    public Kaolinite getKaolinite() throws RestClientResponseException {
         return restTemplate.getForObject(KAOLINITE_URL, Kaolinite.class);
     }
 }
