@@ -1,8 +1,8 @@
 spring:
   kafka:
     bootstrap-servers: localhost:9092
-    consumer:
-      enable-auto-commit: true
+#    consumer:
+#      enable-auto-commit: true
 
 
 app:

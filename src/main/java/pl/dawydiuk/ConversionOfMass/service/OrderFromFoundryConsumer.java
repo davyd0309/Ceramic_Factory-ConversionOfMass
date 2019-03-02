@@ -23,6 +23,7 @@ public class OrderFromFoundryConsumer {
         if (information.equals("Not enough mass")) {
             massProducer.sendMass();
         }
+        //powinno raz otrzymac wiadomosc
     }
 
 }
