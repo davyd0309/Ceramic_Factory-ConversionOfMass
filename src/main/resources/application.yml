@@ -1,14 +1,18 @@
 spring:
   kafka:
-    bootstrap-servers: localhost:9092
-#    consumer:
-#      enable-auto-commit: true
-
+    bootstrap-servers: ${KAFKA_SERVERS}
+    properties:
+      username: ${KAFKA_USERNAME}
+      password: ${KAFKA_PASSWORD}
+      security:
+        protocol: SASL_SSL
+    sasl:
+      mechanism: SCRAM-SHA-256
 
 app:
   topic:
-    orders-from-foundry: orders-from-foundry
-    mass-to-foundry: mass-to-foundry
+    orders-from-foundry: 82jesyk2-orders-from-foundry
+    mass-to-foundry: 82jesyk2-mass-to-foundry
 server:
   port: 8080
 
