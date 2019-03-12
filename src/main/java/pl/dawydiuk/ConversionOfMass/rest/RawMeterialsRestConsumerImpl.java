@@ -1,10 +1,10 @@
 package pl.dawydiuk.ConversionOfMass.rest;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import models.Clay;
 import models.Kaolinite;
 import models.Quartz;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
  */
 
 @Service
+@AllArgsConstructor
 @Slf4j
 public class RawMeterialsRestConsumerImpl implements RawMeterialsRestConsumer {
 
@@ -22,11 +23,6 @@ public class RawMeterialsRestConsumerImpl implements RawMeterialsRestConsumer {
     private static final String CLAY_URL = "http://localhost:8082/rawmaterials/clay";
     private static final String QUARTZ_URL = "http://localhost:8082/rawmaterials/quartz";
     private static final String KAOLINITE_URL = "http://localhost:8082/rawmaterials/kaolinite";
-
-    @Autowired
-    public RawMeterialsRestConsumerImpl(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
 
     @Override
     public Clay getClay() throws RestClientResponseException {

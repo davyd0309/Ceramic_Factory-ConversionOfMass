@@ -11,6 +11,7 @@ public class ConversionOfMassApplicationTests {
 
 	@Test
 	public void contextLoads() {
+
 	}
 
 }
