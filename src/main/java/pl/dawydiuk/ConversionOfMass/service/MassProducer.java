@@ -28,7 +28,7 @@ public class MassProducer {
     void sendMass() {
         kafkaTemplate.send(topic, massBuilder.createMass());
         log.info("Sending mass to topic='{}'", topic);
-        //powinno raz wyslac mase
+        //powinno raz wyslac fmase
     }
 
 
