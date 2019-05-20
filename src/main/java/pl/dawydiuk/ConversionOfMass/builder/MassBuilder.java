@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import pl.dawydiuk.ConversionOfMass.rest.RestTryConsumer;
 
 /**
- * Created by Judith on 02.02.2019.
+ * Created by Konrad on 02.02.2019.
  */
 @Component
 public class MassBuilder {

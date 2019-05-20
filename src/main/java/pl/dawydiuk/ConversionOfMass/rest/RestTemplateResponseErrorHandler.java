@@ -11,7 +11,7 @@ import static org.springframework.http.HttpStatus.Series.CLIENT_ERROR;
 import static org.springframework.http.HttpStatus.Series.SERVER_ERROR;
 
 /**
- * Created by Judith on 10.02.2019.
+ * Created by Konrad on 10.02.2019.
  */
 public class RestTemplateResponseErrorHandler implements ResponseErrorHandler {
 

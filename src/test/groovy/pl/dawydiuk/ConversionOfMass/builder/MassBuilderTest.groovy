@@ -9,12 +9,12 @@ import pl.dawydiuk.ConversionOfMass.rest.RestTryConsumer
 import spock.lang.Specification
 
 /**
- * Created by Judith on 02.02.2019.
+ * Created by Konrad on 02.02.2019.
  */
 class MassBuilderTest extends Specification {
 
     private RestTryConsumer restTryConsumer = Stub()
-    private MassBuilder builder = new MassBuilder(restTryConsumer);
+    private MassBuilder builder = new MassBuilder(restTryConsumer)
 
     def "should create mass with success"() {
         given:

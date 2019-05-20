@@ -5,7 +5,7 @@ import models.Kaolinite;
 import models.Quartz;
 
 /**
- * Created by Judith on 16.02.2019.
+ * Created by Konrad on 16.02.2019.
  */
 public interface RawMeterialsRestConsumer {
     Clay getClay();

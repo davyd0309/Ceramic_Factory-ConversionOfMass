@@ -9,7 +9,7 @@ import pl.dawydiuk.ConversionOfMass.rest.RestTemplateResponseErrorHandler;
 import pl.dawydiuk.ConversionOfMass.rest.RestTryConsumer;
 
 /**
- * Created by Judith on 16.02.2019.
+ * Created by Konrad on 16.02.2019.
  */
 @Configuration
 public class RestBeanConfig {

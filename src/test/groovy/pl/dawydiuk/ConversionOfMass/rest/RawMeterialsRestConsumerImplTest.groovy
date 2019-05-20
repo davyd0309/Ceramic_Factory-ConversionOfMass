@@ -10,11 +10,11 @@ import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
 
 /**
- * Created by Judith on 10.02.2019.
+ * Created by Konrad on 10.02.2019.
  */
 class RawMeterialsRestConsumerImplTest extends Specification {
-    private RestTemplate restTemplate = Stub();
-    private RawMeterialsRestConsumer rawMeterialsConsumer = new RawMeterialsRestConsumerImpl(restTemplate);
+    private RestTemplate restTemplate = Stub()
+    private RawMeterialsRestConsumer rawMeterialsConsumer = new RawMeterialsRestConsumerImpl(restTemplate)
 
 
     def "getClay should throws exception"() {
