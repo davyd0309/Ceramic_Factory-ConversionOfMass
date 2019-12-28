@@ -17,7 +17,7 @@ public class OrderFromFoundryConsumer {
         this.massProducer = massProducer;
     }
 
-    @KafkaListener(topics = "${app.topic.orders-from-foundry}")
+    @KafkaListener(topics = "${app.topic.orders-from-foundry}", autoStartup = "${kafka.listen:true}")
     public void getInformationFromFoundry(@Payload String information) {
         log.info("Received information='{}' from foundry", information);
         if (information.equals("Not enough mass")) {
